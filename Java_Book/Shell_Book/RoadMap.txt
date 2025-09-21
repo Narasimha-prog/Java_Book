@@ -1,0 +1,82 @@
+Mastering Linux Shell & CLI
+────────────────────────────
+Level 1: CLI Basics
+────────────────────────────
+├─ Navigation
+│   ├─ pwd       # Show current directory
+│   ├─ ls        # List files/folders
+│   ├─ cd        # Change directory
+│   └─ tree      # Show folder structure
+│
+├─ File & Folder Management
+│   ├─ mkdir     # Create folder
+│   ├─ touch     # Create file
+│   ├─ cp/mv     # Copy/Move files
+│   └─ rm/rm -r  # Delete files/folders
+│
+├─ Viewing Files
+│   ├─ cat       # Show content
+│   ├─ less      # Paginated view
+│   ├─ head      # First 10 lines
+│   └─ tail      # Last 10 lines
+────────────────────────────
+Level 2: Shell & Text Processing
+────────────────────────────
+├─ Variables
+│   ├─ NAME="Linux"
+│   └─ echo $NAME
+│
+├─ Redirection & Pipes
+│   ├─ >, >>     # Redirect output
+│   ├─ <         # Redirect input
+│   └─ |         # Pipe commands
+│
+├─ Searching & Patterns
+│   ├─ grep "pattern" file
+│   ├─ find . -type f -name "*.java"
+│   └─ wc -l file
+────────────────────────────
+Level 3: Scripting Basics
+────────────────────────────
+├─ Simple Script
+│   ├─ #!/bin/bash
+│   └─ echo "Hello World"
+│
+├─ Input & Variables
+│   └─ read name; echo "Hello $name"
+│
+├─ Conditionals
+│   └─ if [ -f "file.txt" ]; then ... fi
+│
+├─ Loops
+│   ├─ for file in *.java; do echo $file; done
+│   └─ while [ $count -le 5 ]; do ... done
+────────────────────────────
+Level 4: Advanced Shell
+────────────────────────────
+├─ Functions
+│   └─ function greet() { echo "Hello $1"; }
+├─ Command Substitution
+│   └─ files=$(ls *.java)
+├─ Arrays
+│   └─ arr=(one two three); echo ${arr[1]}
+├─ Automation & Scheduling
+│   └─ Cron jobs: crontab -e
+────────────────────────────
+Level 5: Mastery & Productivity
+────────────────────────────
+├─ Text Processing Tools
+│   ├─ awk, sed
+│   ├─ cut, sort, uniq
+│   └─ xargs
+├─ Terminal Multiplexers
+│   └─ tmux, screen
+├─ Best Practices
+│   ├─ Test scripts before running
+│   ├─ Comment your scripts
+│   └─ Modularize functions
+├─ Challenges
+│   ├─ Automate repetitive tasks
+│   ├─ Parse logs, batch rename
+│   └─ Build small CLI tools
+────────────────────────────
