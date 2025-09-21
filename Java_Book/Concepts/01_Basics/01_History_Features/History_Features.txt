@@ -6,11 +6,12 @@
 
 3)Later renamed Java (inspired by Java coffee).
 
-4)Released publicly in 1995.
+4)Released publicly in 1996.
 
 5)Acquired by Oracle Corporation in 2010.
 
 6)Now one of the most popular programming languages for web, desktop, mobile, and enterprise apps.
+
 
 ⭐ Key Features of Java
 
@@ -18,17 +19,18 @@
 
 2)Object-Oriented – everything is treated as objects (except primitives).
 
-3)Platform Independent – "Write Once, Run Anywhere" using the JVM.
+3)Platform Independent – "Write Once(java compailer gives bytecode which is common from every os like linex,windows...which is platform independent), Run Anywhere" using the JVM(which gives .exe for windows,.app for macOs,.... And this jvm is depenedent to os for to give executable files to their related os).
 
-4)Secure – no pointers, runs in a controlled JVM environment.
 
-5)Robust – strong memory management, exception handling.
+4)Secure – no pointers(if we add two pointer program will crash), runs in a controlled JVM environment.
+
+5)Robust – strong memory management(grabage collection), exception handling.
 
 6)Portable – bytecode can run on any system with JVM.
 
 7)Multithreaded – supports parallel execution of tasks.
 
-8)Distributed – supports networking and remote method invocation (RMI).
+8)Distributed – supports networking and remote method invocation (RMI)   (you can call a method that runs on a different machine (remote computer) over the network. It feels like calling a local method, but behind the scenes, Java handles the networking, object serialization, and communication).
 
 9)High Performance – with Just-In-Time (JIT) compiler.
 

@@ -1,0 +1,175 @@
+1)On the command line, the first word is always the tool/program name you’re asking the shell to run.
+Everything after that is just instructions (commands, flags, arguments) for that tool.
+
+
+
+🔑 Structure
+tool-name   subcommand   [flags/options...]   [arguments...]
+
+🚀 Examples
+
+    Git
+
+git push -u origin main
+
+    git → tool name (the program)
+
+    push → subcommand (action: push commits)
+
+    -u → flag (set upstream)
+
+    origin → argument (remote repo name)
+
+    main → argument (branch name)
+
+    Java
+
+java --version
+
+    java → tool name
+
+    --version → flag (show version info instead of running code)
+
+    Linux ls
+
+ls -l /home
+
+    ls → tool name
+
+    -l → flag (long format)
+
+    /home → argument (which folder to list)
+
+✅ So yes: tool/program name always comes first.
+Then you tell it what to do (subcommand), then how to do it (flags/options), and finally what to do it on (arguments).
+note 1)Tool name → Always required
+
+Subcommand → Only for multi-purpose tools(Some tools don’t have subcommands (e.g., ls, java, cat).)
+
+Flags → Optional, fine-tune behavior
+
+Arguments → Optional/required depending on command
+
+
+
+2)"-,--,-- "
+1️⃣ Single dash -
+
+Purpose: Short flags (usually a single letter).
+Usage: Modifies a command’s behavior.
+Example:
+java --version      # show Java version
+git log --oneline   # show commits in one line
+
+Rules:
+
+    Comes after the command
+
+    Can often be used in place of a short flag
+
+    Can combine multiple long flags:
+
+git log --graph --all --oneline
+
+3️⃣ Double dash with space --
+
+Purpose: End of flags; everything after this is treated as a normal argument, even if it starts with -.
+Usage: Avoids confusion when filenames, branch names, or arguments look like flags.
+Example:
+
+git checkout -- myfile.java   # myfile.java is a file, not a branch
+rm -- -file.txt               # -file.txt is a filename, not a flag
+
+Rules:
+
+    Always alone: just --
+
+    Signals the end of flags/options
+
+    Everything after it is treated as a literal argument
+
+✅ Quick Rules Summary
+Symbol	Meaning	Example	Notes
+-	Short flag (single letter)	ls -l	Can combine short flags: ls -la
+--flag	Long flag (descriptive)	git log --oneline	Multiple long flags allowed
+-- 	End of options, treat rest as arguments	git checkout -- myfile.java	Required when argument starts with -
+
+
+
+
+3)Rules fo flags
+Got it! Let’s focus specifically on the rules for using flags and how to combine them.
+
+1️⃣ Rules for using flags
+
+Flags are optional modifiers
+
+They tell the command how to behave but are usually not mandatory.
+
+Example:
+
+    git push -u origin main
+
+    -u is optional; without it, git push origin main still works.
+
+Flags come after the command
+
+    Structure:
+
+tool-name  subcommand  [flags/options]  [arguments]
+
+Example:
+
+    git commit -m "message" file.txt
+
+Only valid flags allowed
+
+    Using unknown flags gives an error:
+
+        git push --banana   # ❌ invalid
+
+    Order matters for some commands
+
+        Most commands allow any order for flags before arguments.
+
+        Flags cannot appear after -- (since that signals end of options).
+
+2️⃣ Combined flags
+a) Short flags (single dash)
+
+    Can be combined if they are single-letter flags and don’t take values.
+
+    Example:
+
+ls -la
+
+    Same as:
+
+ls -l -a
+
+    Note: Flags that require a value cannot be combined:
+
+git commit -am "message"  # ✅ valid (-a and -m combined, -m takes value)
+git commit -ma "message"  # ❌ invalid order
+
+b) Long flags (double dash)
+
+    Cannot be combined like short flags.
+
+    Must be written separately:
+
+git log --graph --oneline --all
+
+✅ Summary
+Flag type	Combine?	Example
+Short (-l)	Yes, if no values needed	ls -la
+Long (--all)	No	git log --graph --all
+Flags with values	Only specific combinations allowed	git commit -am "msg"
+
+💡 Rule of thumb:
+
+    Short flags = can combine if they don’t need extra input
+
+    Long flags = always separate
+
+    Flags go before arguments, unless you use --
