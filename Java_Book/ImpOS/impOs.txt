@@ -71,6 +71,26 @@ Rules:
 
 git log --graph --all --oneline
 
+2️⃣ Double dash -- (long flags, no space)
+
+Purpose: Long-form options or flags (usually full words).
+Usage: Makes commands more readable and explicit.
+Example:
+
+java --version       # show Java version
+git log --oneline    # show commits in one line
+
+
+Rules:
+
+Comes after the command
+
+Typically full-word options, more descriptive than single-letter flags
+
+Can combine multiple long flags:
+
+git log --graph --all --oneline
+
 3️⃣ Double dash with space --
 
 Purpose: End of flags; everything after this is treated as a normal argument, even if it starts with -.
