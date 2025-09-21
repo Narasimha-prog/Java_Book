@@ -1,0 +1,8 @@
+# Ignore LibreOffice lock/backup files
+*~lock.*
+*.bak
+*.tmp
+*.swp
+*#
+.config/libreoffice/
+
