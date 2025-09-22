@@ -2,18 +2,73 @@ Mastering Linux Shell & CLI
 ────────────────────────────
 Level 1: CLI Basics
 ────────────────────────────
-├─ Navigation
-│   ├─ pwd       # Show current directory
+├─ 1.Navigation
+│   ├─ pwd       # Show current directory  
+|   |                eg: admin@host:~/Java_world$ pwd → /home/admin/Java_world
 │   ├─ ls        # List files/folders
+|   |                eg:admin123@admin123-Inspiron-15-3520:~/Java_world$ ls   Java_Book
+|   |
 │   ├─ cd        # Change directory
+|   |                eg: cd Concepts/01_Basics
 │   └─ tree      # Show folder structure
-│
-├─ File & Folder Management
+│                    eg:admin123@admin123-Inspiron-15-3520:~/Java_world/Java_Book$ tree
+.
+                                                       ├── Concepts
+                                                       │   ├── 01_Basics
+                                                       │   │   ├── 01_History_Features
+                                                       │   │   │   ├── History_Features.odt
+                                                       │   │   │   └── History_Features.txt
+                                                       │   │   └── 02_Environment_WorkingDetails
+                                                       │   │       └── JDK_JRE_JVM.odt
+                                                       │   |
+                                                       │   ├── ExceptionHandling
+                                                       │   ├── Generics
+                                                       │   ├── ImmutableString
+                                                       │   │   ├── StringBuffer
+                                                       │   │   └── StringBuilder
+                                                       │   ├── InnerClasses
+                                                       │   ├── IOStreams
+                                                       │   ├── MultiThreading
+                                                       │   ├── newIOStreams                 
+                                                       │   ├── StreamApi
+                                                       │   └── Strig
+                                                       └── Shell_Book
+                                                           └── RoadMap.txt
+                                                           
+                                                Navigation
+Command	 Full Name	           Functionality	                               Example
+-------  -------                     ----------                                        -------
+pwd	Print Working Directory	  Shows the full path of the current directory	       admin@host:~/Java_world$ pwd → /home/admin/Java_world
+ls	List	                  Lists files and directories in current folder	       ls   Java_Book
+cd	Change Directory	  Move between directories	                       cd Concepts/01_Basics
+tree	Tree	                  Displays folder structure in hierarchical view       ......
+
+
+27 directories, 6 files
+
+├─ 2. File & Folder Management
 │   ├─ mkdir     # Create folder
 │   ├─ touch     # Create file
 │   ├─ cp/mv     # Copy/Move files
 │   └─ rm/rm -r  # Delete files/folders
 │
+
+
+
+2. File & Folder Management
+Command	       Full Name	   Functionality                                            Example
+-------         --------           -------------                                           ----------
+mkdir	        Make Directory	    Create new folders                                     mkdir Projects → creates a folder named Projects
+touch	        Touch	            Create new empty files                                 touch notes.txt → creates an empty file called notes.txt
+cp / mv	        Copy / Move	    Copy or move files/folders                             cp file.txt backup/ → copies file.txt to the backup folder
+                                                                                           mv file.txt archive/ → moves file.txt to the archive folder
+rm / rm -r 	Remove	            Delete files (rm) or directories recursively (rm -r)   rm oldfile.txt → deletes the file oldfile.txt
+/rm  -rf                                                                                   rm -r OldProjects/ → deletes folder OldProjects and all its contents,no error message is shown. 
+                                                                                                                                
+                                                                                           And   Suppresses warnings
+                                                                                          Note: Always be careful with -f, especially combined with -r (rm -rf), 
+                                                                                          because deleted files cannot   be recovered.
+
 ├─ Viewing Files
 │   ├─ cat       # Show content
 │   ├─ less      # Paginated view

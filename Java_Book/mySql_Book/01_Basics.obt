@@ -1,0 +1,50 @@
+Step 1: Update the system
+sudo apt update
+sudo apt upgrade -y
+
+Step 2: Install MySQL Server
+sudo apt install mysql-server -y
+
+Step 3: Start and enable MySQL
+sudo systemctl start mysql
+sudo systemctl enable mysql
+
+Step 4: Log in as root using sudo
+sudo mysql
+
+
+This opens the MySQL prompt as root without a password.
+
+Step 5: Set a password and switch to password authentication
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YourStrongPassword';
+FLUSH PRIVILEGES;
+EXIT;
+
+
+Replace YourStrongPassword with a secure password
+
+This switches root from auth_socket to mysql_native_password and sets the password.
+
+Step 6: Test root login
+mysql -u root -p
+
+
+Enter the password you just set.
+
+You should now see the MySQL prompt (mysql>).
+
+Step 7: Secure the installation (optional but recommended)
+sudo mysql_secure_installation
+
+
+Now that root has a password, this script will work without errors.
+
+Recommended answers:
+
+Remove anonymous users → Y
+
+Disallow root login remotely → Y
+
+Remove test database → Y
+
+Reload privilege tables → Y

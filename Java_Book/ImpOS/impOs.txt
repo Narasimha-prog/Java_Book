@@ -193,3 +193,10 @@ Flags with values	Only specific combinations allowed	git commit -am "msg"
     Long flags = always separate
 
     Flags go before arguments, unless you use --
+    
+    
+    
+    
+    
+    
+    ctl+h --> to see hidden files like.gitignore
