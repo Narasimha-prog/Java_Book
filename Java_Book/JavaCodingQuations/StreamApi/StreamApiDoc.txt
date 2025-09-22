@@ -1,0 +1,180 @@
+📘 Java Streams – Complete Notes
+1. What is a Stream?
+
+A Stream is a sequence of elements supporting functional-style operations.
+
+Introduced in Java 8.
+
+Streams do not store data → they work on data from collections, arrays, I/O channels, etc.
+
+Streams are lazy → operations are executed only when a terminal operation is invoked.
+
+2. Stream Pipeline
+
+A Stream pipeline consists of:
+
+Source → Intermediate Operations → Terminal Operation
+
+
+Source → Collection, Array, or I/O.
+
+Intermediate Operations → Transform/Filter the stream (return another stream).
+
+Terminal Operation → Produces result (returns non-stream).
+
+Example:
+List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David");
+
+names.stream()                            // Source
+     .filter(name -> name.length() > 3)   // Intermediate
+     .map(String::toUpperCase)            // Intermediate
+     .forEach(System.out::println);       // Terminal
+
+3. Stream Diagram (Text-Based)
+Collection/Array/IO Source
+        │
+        ▼
++--------------------+
+|   Stream pipeline  |
+|--------------------|
+| filter()           |
+| map()              |
+| sorted()           |
+| distinct()         |
++--------------------+
+        │
+        ▼
+Terminal Operation (forEach, collect, reduce, count...)
+
+4. Types of Streams
+
+Stream<T> → Generic stream of objects.
+
+IntStream, LongStream, DoubleStream → Primitive streams (avoid boxing overhead).
+
+5. Key Operations
+Intermediate (return a Stream)
+
+filter(Predicate<T>) → keep elements matching condition
+
+map(Function<T,R>) → transform elements
+
+sorted() / sorted(Comparator)
+
+distinct() → remove duplicates
+
+limit(n) → take first n elements
+
+skip(n) → skip first n elements
+
+Terminal (end pipeline, return non-stream)
+
+forEach(Consumer<T>)
+
+collect(Collectors.toList(), toSet(), toMap(), joining(), groupingBy())
+
+reduce() → aggregate into single value
+
+count() → count elements
+
+anyMatch(), allMatch(), noneMatch()
+
+6. Default Functional Interfaces (java.util.function)
+
+Java 8 provides functional interfaces → used in lambda expressions & streams.
+
+Core Interfaces
+
+Function<T, R> → takes T, returns R
+
+Example: map(String::length)
+
+Predicate<T> → takes T, returns boolean
+
+Example: filter(x -> x > 10)
+
+Consumer<T> → takes T, returns nothing
+
+Example: forEach(System.out::println)
+
+Supplier<T> → takes nothing, returns T
+
+Example: Supplier<Date> now = Date::new
+
+Primitive Specializations
+
+IntFunction<R>, IntPredicate, IntConsumer
+
+LongFunction<R>, LongPredicate, LongConsumer
+
+DoubleFunction<R>, DoublePredicate, DoubleConsumer
+
+7. Collectors
+
+Collectors.toList() → convert stream to list
+
+Collectors.toSet() → convert stream to set
+
+Collectors.toMap(keyMapper, valueMapper) → convert to map
+
+Collectors.joining(", ") → join strings
+
+Collectors.groupingBy(Function, downstream) → group by property
+
+Collectors.partitioningBy(Predicate) → divide into true/false groups
+
+8. Example with grouping & counting
+String text = "hello world";
+
+Map<Character, Long> freq = text.chars()
+        .mapToObj(c -> (char) c)  
+        .collect(Collectors.groupingBy(
+                Function.identity(),
+                Collectors.counting()
+        ));
+
+freq.forEach((ch, count) -> 
+    System.out.println(ch + " -> " + count));
+
+
+Output:
+
+h -> 1
+e -> 1
+l -> 3
+o -> 2
+  -> 1
+w -> 1
+r -> 1
+d -> 1
+
+9. Parallel Streams
+
+Enable parallelism using parallelStream().
+
+Example:
+
+numbers.parallelStream().forEach(System.out::println);
+
+
+Be careful: results may be unordered.
+
+10. Summary
+
+Streams = functional way to process data.
+
+Think in pipelines → Source → Intermediate → Terminal.
+
+Use functional interfaces (Function, Predicate, Consumer, Supplier).
+
+Collectors are powerful for grouping, partitioning, and aggregating.
+
+Prefer Streams for readability & declarative code.
+
+🚀 Text Diagram for Functional Interfaces
+Function<T,R>    : (T) -> R
+Predicate<T>     : (T) -> boolean
+Consumer<T>      : (T) -> void
+Supplier<T>      : () -> T
+BiFunction<T,U,R>: (T, U) -> R
+
