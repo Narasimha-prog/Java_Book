@@ -200,3 +200,15 @@ Flags with values	Only specific combinations allowed	git commit -am "msg"
     
     
     ctl+h --> to see hidden files like.gitignore
+    
+    
+    
+    NANO Tool For text editor
+    -----
+    alt+m  for mouse allow
+    ctrl+o + enter  save data
+    ctrl + X  exit
+    
+    
+    
+    F11 (toggle for Menu option)
