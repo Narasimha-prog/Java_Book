@@ -135,3 +135,146 @@ Level 5: Mastery & Productivity
 │   ├─ Parse logs, batch rename
 │   └─ Build small CLI tools
 ────────────────────────────
+
+
+Shell Scripts, chmod, Sessions, and source – Complete Guide
+1. Shell Scripts (.sh)
+
+Shell script = text file with shell commands.
+
+Example: setvars.sh
+
+export DB_PASS="admin123"
+export IMAGE_NAME="postgres:15"
+
+
+Can be executed in two ways:
+
+Normal execution: ./setvars.sh
+
+Sourcing: source ./setvars.sh or . ./setvars.sh
+
+2. Shell Sessions
+
+Current shell = the terminal you are typing in.
+
+Child shell (subshell) = a new shell created to run a command or script.
+
+2.1 Normal script execution (./script.sh)
+./setvars.sh
+
+
+Creates a child shell to run the script.
+
+Variables exported in the script exist only in the child shell.
+
+After the script finishes, the child shell terminates, variables are lost.
+
+Example:
+
+./setvars.sh
+echo $DB_PASS   # Output: empty (lost)
+
+2.2 Using source (source script.sh)
+source ./setvars.sh
+# or
+. ./setvars.sh
+
+
+Runs the script inside the current shell.
+
+Variables persist in the current session.
+
+No new shell is created → you can immediately use variables:
+
+echo $DB_PASS   # Output: admin123
+docker run -e $DB_PASS $IMAGE_NAME
+
+3. File Permissions and chmod
+
+Scripts must have execute permission to run normally (./script.sh).
+
+3.1 Making a script executable
+chmod +x setvars.sh
+
+
+chmod = tool to change file permissions
+
++x = mode/argument telling chmod to add execute permission
+
+setvars.sh = target file
+
+Key: +x is not a flag; it’s a mode argument for chmod.
+
+3.2 Without +x
+./setvars.sh
+# bash: ./setvars.sh: Permission denied
+
+
+You cannot run the script as a program until execute permission is added.
+
+Not needed for source ./setvars.sh, because sourcing does not execute a separate process.
+
+4. Sessions and Variable Behavior
+Method	New Shell?	Variables Persist?	Notes
+./script.sh	✅ Yes (child)	❌ No	Executes in child shell, variables lost after script ends
+source ./script.sh	❌ No (current shell)	✅ Yes	Variables remain in current shell, can be used immediately
+5. Using source
+
+Purpose: execute script inside current shell.
+
+Preserves variables, functions, aliases.
+
+Syntax:
+
+source script.sh
+# or
+. script.sh
+
+
+Commonly used to load environment variables for tools like Docker, Java, or custom scripts.
+
+6. Summary – Workflow
+
+Create a shell script:
+
+nano setvars.sh
+# Add:
+export DB_PASS="admin123"
+export IMAGE_NAME="postgres:15"
+
+
+(Optional) Make executable for normal execution:
+
+chmod +x setvars.sh
+
+
+Load variables into current shell:
+
+source ./setvars.sh
+
+
+Use variables:
+
+echo $DB_PASS
+docker run -e $DB_PASS $IMAGE_NAME
+
+7. Key Points
+
+./script.sh → child shell, variables lost after script ends.
+
+source script.sh → current shell, variables persist.
+
+chmod +x → required to run script normally, not for sourcing.
+
++x in chmod is a mode, not a command-line flag.
+
+This document fully covers:
+
+.sh scripts execution
+
+chmod usage for scripts
+
+How shell sessions work (child vs current)
+
+How source affects the shell and variable persistence
