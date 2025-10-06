@@ -83,25 +83,25 @@ anyMatch(), allMatch(), noneMatch()
 
 Java 8 provides functional interfaces → used in lambda expressions & streams.
 
-Core Interfaces
+                                                    Core Interfaces
 
-Function<T, R> → takes T, returns R
+  Function<T, R> → takes T, returns R
 
 Example: map(String::length)
 
-Predicate<T> → takes T, returns boolean
+  Predicate<T> → takes T, returns boolean
 
 Example: filter(x -> x > 10)
 
-Consumer<T> → takes T, returns nothing
+  Consumer<T> → takes T, returns nothing
 
 Example: forEach(System.out::println)
 
-Supplier<T> → takes nothing, returns T
+   Supplier<T> → takes nothing, returns T
 
 Example: Supplier<Date> now = Date::new
 
-Primitive Specializations
+   Primitive Specializations
 
 IntFunction<R>, IntPredicate, IntConsumer
 
@@ -109,7 +109,7 @@ LongFunction<R>, LongPredicate, LongConsumer
 
 DoubleFunction<R>, DoublePredicate, DoubleConsumer
 
-7. Collectors
+         7. Collectors
 
 Collectors.toList() → convert stream to list
 
@@ -122,6 +122,7 @@ Collectors.joining(", ") → join strings
 Collectors.groupingBy(Function, downstream) → group by property
 
 Collectors.partitioningBy(Predicate) → divide into true/false groups
+
 
 8. Example with grouping & counting
 String text = "hello world";
@@ -372,3 +373,194 @@ The default downstream of groupingBy is Collectors.toList().
 But you can replace it with any collector: toSet(), counting(), summingInt(), mapping(), etc.
 
 So Collectors.counting() is just another downstream collector.
+
+
+
+                                                                           1️⃣ WHAT IS PARTITIONINGBY?
+
+partitioningBy splits a stream into two groups based on a predicate (true/false).
+
+It always produces a Map<Boolean, List<T>> by default.
+
+Syntax:
+
+partitioningBy(Predicate<T> predicate)
+partitioningBy(Predicate<T> predicate, Collector downstream)
+
+2️⃣ How it works
+
+Predicate → decides if an element goes into true or false group.
+
+Downstream collector (optional) → how to collect elements in each partition (default = toList()).
+
+Flow diagram (text-based):
+
+Stream elements
+        │
+        ▼
+partitioningBy(predicate)
+        │
+        ▼
+Map<Boolean, List<T>>  (default)
+   ├── true → elements satisfying predicate
+   └── false → elements not satisfying predicate
+
+3️⃣ Examples
+Example 1: Basic partitioning (true/false groups)
+List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+
+Map<Boolean, List<Integer>> partitioned = numbers.stream()
+    .collect(Collectors.partitioningBy(n -> n % 2 == 0));
+
+System.out.println(partitioned);
+
+
+Output:
+
+{false=[1, 3, 5], true=[2, 4, 6]}
+
+
+true → even numbers
+
+false → odd numbers
+
+Example 2: Using a downstream collector
+
+You can combine it with counting(), toSet(), etc.:
+
+Map<Boolean, Long> counts = numbers.stream()
+    .collect(Collectors.partitioningBy(n -> n % 2 == 0, Collectors.counting()));
+
+System.out.println(counts);
+
+
+Output:
+
+{false=3, true=3}
+
+
+Counts how many elements satisfy the predicate (true/false).
+
+4️⃣ Key Points
+Feature	Detail
+Arguments	1 or 2
+1 arg	Predicate → splits into true/false, values in List
+2 args	Predicate + downstream collector → values collected according to collector (Set, Count, Sum, etc.)
+Result type	Map<Boolean, X> (default List<T>)
+
+Unlike groupingBy, partitioningBy always produces two partitions: true and false.
+
+Very handy for yes/no, pass/fail, even/odd type splitting.
+
+5️⃣ Example with objects
+class Person {
+    String name;
+    int age;
+    Person(String n, int a) { name = n; age = a; }
+}
+
+List<Person> people = List.of(
+    new Person("Alice", 20),
+    new Person("Bob", 17),
+    new Person("Charlie", 25)
+);
+
+Map<Boolean, List<Person>> adults = people.stream()
+    .collect(Collectors.partitioningBy(p -> p.age >= 18));
+
+System.out.println(adults);
+
+
+Output:
+
+{false=[Bob], true=[Alice, Charlie]}
+
+
+true → adults
+
+false → minors
+
+So, to summarize:
+
+partitioningBy splits into two groups: true/false.
+
+Optional downstream collector controls how the elements are stored or aggregated.
+
+Always 1 or 2 arguments:
+
+Predicate
+
+Predicate + downstream collector  
+
+1️⃣ Conceptual Comparison
+Feature	groupingBy	partitioningBy
+Purpose	Group elements by a key (can be multiple groups)	Split elements into two groups (true/false)
+Number of partitions	Depends on key values	Always 2 (true / false)
+Result Map	Map<K, List<T>> by default	Map<Boolean, List<T>> by default
+Arguments	1, 2, or 3:
+1. classifierFunction
+2. classifierFunction + downstreamCollector or classifierFunction + mapFactory
+3. classifierFunction + mapFactory + downstreamCollector	1 or 2:
+1. Predicate
+2. Predicate + downstreamCollector
+Downstream collector	Optional: toList(), toSet(), counting(), mapping(), etc.	Optional: toList(), toSet(), counting(), etc.
+Map type control	Can specify map type (HashMap, TreeMap, etc.)	Cannot specify map type (always HashMap)
+2️⃣ Data Flow Diagrams
+groupingBy
+Stream elements
+        │
+        ▼
+groupingBy(classifierFunction)
+        │
+        ▼
+Map<Key, Values> 
+   key1 -> [elements with key1]
+   key2 -> [elements with key2]
+   ...
+Downstream collector decides how values are stored (List, Set, Count)
+
+
+Example:
+
+words.stream()
+     .collect(Collectors.groupingBy(w -> w.charAt(0)));
+
+
+Output:
+
+{a=[apple, apricot], b=[banana, blueberry], c=[cherry]}
+
+partitioningBy
+Stream elements
+        │
+        ▼
+partitioningBy(predicate)
+        │
+        ▼
+Map<Boolean, Values>
+   true  -> [elements satisfying predicate]
+   false -> [elements not satisfying predicate]
+Downstream collector decides how values are stored (List, Set, Count)
+
+
+Example:
+
+numbers.stream()
+       .collect(Collectors.partitioningBy(n -> n % 2 == 0));
+
+
+Output:
+
+{false=[1,3,5], true=[2,4,6]}
+
+3️⃣ Key Takeaways
+
+groupingBy → many groups, key-based, more flexible, can control map type.
+
+partitioningBy → exactly 2 groups, true/false, simpler.
+
+Both support downstream collectors: toList(), toSet(), counting(), etc.
+
+Use partitioningBy when you only need binary splitting.
+
+Use groupingBy when you need multi-key grouping.

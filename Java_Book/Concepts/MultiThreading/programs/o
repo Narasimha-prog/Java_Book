@@ -1,0 +1,13 @@
+public class SyncBlockDemo {
+    public static void main(String[] args) {
+        SharedResource obj = new SharedResource();
+
+        Thread t1 = new Thread(() -> obj.method(), "Thread-1");
+        Thread t2 = new Thread(() -> obj.method(), "Thread-2");
+
+        t1.start();
+        t2.start();
+    }
+}
+
+

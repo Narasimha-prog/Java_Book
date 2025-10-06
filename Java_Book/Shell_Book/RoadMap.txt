@@ -278,3 +278,23 @@ chmod usage for scripts
 How shell sessions work (child vs current)
 
 How source affects the shell and variable persistence
+
+
+
+
+🔄 If you wanted to redirect data between files
+
+That would use different operators:
+
+> → redirect program output to a file (overwrite).
+
+>> → redirect program output to a file (append).
+
+< → redirect a file as input to a program.
+
+Example:
+
+cat input.txt > output.txt
+
+
+Copies contents of input.txt into output.txt.
