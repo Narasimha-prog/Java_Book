@@ -1,0 +1,47 @@
+PostgreSQL Numeric Types
+--------------------------
+Data Type	          Storage Size	Range / Precision
+smallint / int2	            2 bytes	-32,768 to 32,767
+integer / int / int4	    4 bytes	-2,147,483,648 to 2,147,483,647
+bigint / int8	            8 bytes	-9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+decimal / numeric	    Variable	User-defined precision, exact values
+real / float4	            4 bytes	6 decimal digits precision (approx.)
+double precision / float8   8 bytes	15 decimal digits precision (approx.)
+serial	                    4 bytes	Auto-incrementing integer (1 to 2,147,483,647)
+bigserial	            8 bytes	Auto-incrementing bigint (1 to 9,223,372,036,854,775,807)
+🔹 Character Types
+------------------
+Data Type	Description
+char(n)	        Fixed-length string (blank padded).
+varchar(n)	Variable-length string with limit.
+text	        Variable unlimited length string.
+🔹 Date/Time Types
+-------------------
+Data Type	                       Storage Size	Description
+date	                                4 bytes 	Calendar date (year, month, day).
+time [ (p) ]	                        8 bytes	       Time of day (without time zone).
+time with time zone (timetz)	        12 bytes	Time  of day with time zone.
+timestamp [ (p) ]	                8 bytes	       Date and time (no time zone).
+timestamp with time zone (timestamptz)	8 bytes	       Date and time with time zone.
+interval	                        16 bytes	Time span (e.g., 1 year 2 days).
+🔹 Boolean Type
+----------------
+Data Type	Storage Size	Description
+boolean	1 byte	true / false / null
+🔹 Binary Types
+Data Type	Description
+bytea	Variable-length binary string (binary data).
+bit(n)	Fixed-length bit string.
+varbit	Variable-length bit string.
+🔹 Other Important Types
+Data Type	Description
+uuid	Universal unique identifier (16 bytes).
+json	Text-based JSON data.
+jsonb	Binary JSON storage, efficient for indexing.
+xml	XML data.
+array	One-dimensional or multi-dimensional arrays of any type.
+enum	Custom enumerated type (user-defined set of values).
+hstore	Key-value store (string pairs).
+money	Currency type (fixed fractional precision).
+cidr, inet	IP network addresses.
+macaddr	MAC addresses.
