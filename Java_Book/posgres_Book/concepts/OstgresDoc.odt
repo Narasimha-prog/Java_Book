@@ -1,3 +1,6 @@
+
+
+                           Data types
 PostgreSQL Numeric Types
 --------------------------
 Data Type	          Storage Size	Range / Precision
@@ -24,24 +27,32 @@ time with time zone (timetz)	        12 bytes	Time  of day with time zone.
 timestamp [ (p) ]	                8 bytes	       Date and time (no time zone).
 timestamp with time zone (timestamptz)	8 bytes	       Date and time with time zone.
 interval	                        16 bytes	Time span (e.g., 1 year 2 days).
+
+
 🔹 Boolean Type
 ----------------
 Data Type	Storage Size	Description
-boolean	1 byte	true / false / null
+boolean	          1 byte	true / false / null
+
+
 🔹 Binary Types
+----------------
 Data Type	Description
-bytea	Variable-length binary string (binary data).
-bit(n)	Fixed-length bit string.
-varbit	Variable-length bit string.
+bytea	      Variable-length binary string (binary data).
+bit(n)	      Fixed-length bit string.
+varbit	      Variable-length bit string.
+
+
 🔹 Other Important Types
+-------------------------
 Data Type	Description
-uuid	Universal unique identifier (16 bytes).
-json	Text-based JSON data.
-jsonb	Binary JSON storage, efficient for indexing.
-xml	XML data.
-array	One-dimensional or multi-dimensional arrays of any type.
-enum	Custom enumerated type (user-defined set of values).
-hstore	Key-value store (string pairs).
-money	Currency type (fixed fractional precision).
+uuid	    Universal unique identifier (16 bytes).
+json	    Text-based JSON data.
+jsonb	    Binary JSON storage, efficient for indexing.
+xml	    XML data.
+array	    One-dimensional or multi-dimensional arrays of any type.
+enum	    Custom enumerated type (user-defined set of values).
+hstore	    Key-value store (string pairs).
+money	    Currency type (fixed fractional precision).
 cidr, inet	IP network addresses.
-macaddr	MAC addresses.
+macaddr	    MAC addresses.
