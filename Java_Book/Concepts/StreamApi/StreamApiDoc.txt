@@ -1,26 +1,25 @@
 📘 Java Streams – Complete Notes
 1. What is a Stream?
-
 A Stream is a sequence of elements supporting functional-style operations.
 
 Introduced in Java 8.
-
-Streams do not store data → they work on data from collections, arrays, I/O channels, etc.
-
+--------------------
+Streams do not store data → they work on data from  collections, arrays, I/O channels, etc.
 Streams are lazy → operations are executed only when a terminal operation is invoked.
 
-2. Stream Pipeline
 
+2. Stream Pipeline
+--------------------
 A Stream pipeline consists of:
 
-Source → Intermediate Operations → Terminal Operation
-
+                                                Source → Intermediate Operations → Terminal Operation
 
 Source → Collection, Array, or I/O.
 
 Intermediate Operations → Transform/Filter the stream (return another stream).
 
 Terminal Operation → Produces result (returns non-stream).
+
 
 Example:
 List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David");
@@ -31,6 +30,7 @@ names.stream()                            // Source
      .forEach(System.out::println);       // Terminal
 
 3. Stream Diagram (Text-Based)
+----------------------------
 Collection/Array/IO Source
         │
         ▼
@@ -46,13 +46,17 @@ Collection/Array/IO Source
         ▼
 Terminal Operation (forEach, collect, reduce, count...)
 
+
 4. Types of Streams
+---------------------
 
 Stream<T> → Generic stream of objects.
 
 IntStream, LongStream, DoubleStream → Primitive streams (avoid boxing overhead).
 
+
 5. Key Operations
+--------------------
 Intermediate (return a Stream)
 
 filter(Predicate<T>) → keep elements matching condition
@@ -79,7 +83,9 @@ count() → count elements
 
 anyMatch(), allMatch(), noneMatch()
 
+
 6. Default Functional Interfaces (java.util.function)
+--------------------------------------------------
 
 Java 8 provides functional interfaces → used in lambda expressions & streams.
 
