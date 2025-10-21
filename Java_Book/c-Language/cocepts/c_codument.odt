@@ -1,0 +1,201 @@
+
+
+C Programming Guide for Java Developers
+1️⃣ Basics of C
+1.1 Structure of a C Program
+#include <stdio.h> // library inclusion
+
+int main() {       // entry point
+    printf("Hello, C!\n");
+    return 0;
+}
+
+
+#include <stdio.h> → like import java.util.*; in Java
+
+main() → entry point of the program
+
+printf → prints to console
+
+return 0 → indicates successful execution
+
+1.2 Data Types
+C Type	Example	Java Equivalent	Notes
+int	int x = 10;	int x = 10;	4 bytes typically
+float	float f = 3.14;	float f = 3.14f;	4 bytes
+double	double d = 3.14159;	double d = 3.14159;	8 bytes
+char	char c = 'A';	char c = 'A';	1 byte
+_Bool / stdbool.h	bool flag = true;	boolean flag = true;	only 0 or 1
+char[]	char str[] = "Hello";	String str = "Hello";	null-terminated
+1.3 Variables & Constants
+int x = 5;          // variable
+const int y = 10;   // constant (cannot change)
+
+2️⃣ Operators
+
+Arithmetic: + - * / % ++ --
+
+Comparison: == != > < >= <=
+
+Logical: && || !
+
+Assignment: = += -= *= /= %=
+
+Bitwise: & | ^ ~ << >>
+
+3️⃣ Control Structures
+3.1 Conditional Statements
+if (x > 0) {
+    printf("Positive");
+} else {
+    printf("Non-positive");
+}
+
+3.2 Switch Statement
+switch (option) {
+    case 1: printf("One"); break;
+    case 2: printf("Two"); break;
+    default: printf("Other");
+}
+
+3.3 Loops
+
+for, while, do-while
+
+for(int i = 0; i < 5; i++) {
+    printf("%d ", i);
+}
+
+4️⃣ Functions
+int add(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    int sum = add(5, 10);
+    printf("%d", sum);
+    return 0;
+}
+
+
+No method overloading or default parameters in C
+
+Pass pointers to modify original data
+
+5️⃣ Pointers
+int x = 10;
+int *p = &x;  // p stores address of x
+
+printf("%p\n", (void*)p);  // prints address
+printf("%d\n", *p);        // prints value 10
+
+
+& → address of variable
+
+* → dereference pointer to get value
+
+Pointers can traverse arrays (*(arr+1))
+
+5.1 Array & Pointer Relationship
+int arr[3] = {10, 20, 30};
+int *ptr = arr;  // array decays to pointer
+
+printf("%d\n", *ptr);     // 10
+printf("%d\n", *(ptr+1)); // 20
+
+
+Arrays in function parameters decay to pointers
+
+Always pass size explicitly for safety
+
+6️⃣ Strings
+char str[] = "Hello";
+printf("%s\n", str);       // prints string
+printf("%c\n", str[0]);    // prints 'H'
+
+
+Strings are null-terminated char arrays
+
+Standard functions: strlen, strcpy, strcmp
+
+7️⃣ Input / Output (I/O)
+7.1 Standard I/O
+int num;
+scanf("%d", &num);       // input integer
+printf("You entered %d\n", num); // print integer
+
+
+%d → int
+
+%f → float
+
+%lf → double
+
+%c → char
+
+%s → string
+
+%p → pointer
+
+Important: scanf needs & to write input to memory
+
+7.2 File I/O
+FILE *fp = fopen("file.txt", "r"); // open file
+fclose(fp);                        // close file
+
+8️⃣ Memory Management
+
+Static allocation: int arr[5]; → memory fixed at compile-time
+
+Dynamic allocation: malloc, calloc, free
+
+int *ptr = (int*) malloc(5 * sizeof(int));
+free(ptr);
+
+
+No garbage collection — manual memory management required
+
+9️⃣ Special Concepts for Java Developers
+Concept	C	Java Analogy
+Pointer	Direct memory address	Reference (but opaque)
+Array decay	Array becomes pointer in functions	References keep object identity
+Format specifier	%d, %s tells printf type	Java knows type automatically
+No objects	Only structs, pointers, and functions	Classes and objects
+Manual memory	malloc / free	JVM GC handles memory
+10️⃣ Example: Simple Calculator
+#include <stdio.h>
+
+int main() {
+    char op;
+    double num1, num2, result;
+
+    printf("Enter operator (+,-,*,/): ");
+    scanf(" %c", &op);
+
+    printf("Enter first number: ");
+    scanf("%lf", &num1);
+
+    printf("Enter second number: ");
+    scanf("%lf", &num2);
+
+    if(op == '+') result = num1 + num2;
+    else if(op == '-') result = num1 - num2;
+    else if(op == '*') result = num1 * num2;
+    else if(op == '/') result = (num2 != 0) ? num1/num2 : 0;
+    else { printf("Invalid operator\n"); return 1; }
+
+    printf("Result: %.2lf\n", result);
+    return 0;
+}
+
+11️⃣ Key Takeaways for Java Developers
+
+C is procedural, not object-oriented.
+
+Pointers are core; arrays and functions rely on them.
+
+No runtime type information → format specifiers are required.
+
+Memory is manual → dynamic allocation requires malloc / free.
+
+Functions get addresses, not copies, so data can be modified directly.

@@ -212,3 +212,8 @@ Flags with values	Only specific combinations allowed	git commit -am "msg"
     
     
     F11 (toggle for Menu option)
+    
+    
+    
+    Alt+M---> to activate mouse in nano command tool
+   for selecting lines in folsers   cd "$(ls -1 | sed -n '1p')"
